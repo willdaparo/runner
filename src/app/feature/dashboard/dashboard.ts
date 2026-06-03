@@ -32,7 +32,7 @@ interface GlobalStat {
   styleUrls: ['./dashboard.css'],
 })
 export class Dashboard implements OnInit {
-  private readonly API_URL = 'https://runner-frontend-production.up.railway.app';
+  private readonly API_URL = 'https://runner-frontend-production.up.railway.app/api';
 
   ranking: PlayerStat[] = [];
   myStats: PlayerStat | null = null;

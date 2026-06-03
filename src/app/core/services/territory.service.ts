@@ -21,7 +21,7 @@ export interface Territory {
   providedIn: 'root',
 })
 export class TerritoryService {
-  private readonly API_URL = 'https://runner-frontend-production.up.railway.app';
+  private readonly API_URL = 'https://runner-frontend-production.up.railway.app/api';
 
   readonly territories$ = new BehaviorSubject<Territory[]>([]);
 
