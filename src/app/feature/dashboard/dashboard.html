@@ -1,0 +1,152 @@
+<!-- Ejemplo de un botón simple -->
+<div class="header-actions">
+  <button (click)="logout()" class="btn-logout">
+    Cerrar Sesión
+  </button>
+</div>
+  <div class="hijo">
+  <h1>Bienvenido Usuario</h1>
+  <p>Aquí puedes ver tus datos y estadísticas.</p>
+  <button mat-raised-button color="primary" routerLink="/mapa">Ver Mapa</button>
+</div>
+
+<div class="dash">
+
+  <!-- Fondo animado -->
+  <div class="dash__bg">
+    <div class="hex-grid"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="dash__header">
+    <div class="logo">
+      <span class="logo__hex">⬡</span>
+      <span class="logo__name">TERRUNO</span>
+    </div>
+    <button class="btn-run" (click)="goToMap()">
+      <span>INICIAR CARRERA</span>
+      <span class="btn-run__arrow">→</span>
+    </button>
+  </header>
+
+  <!-- Global stats bar -->
+  <section class="global-bar" [hidden]="!global">
+    <div class="global-stat">
+      <span class="global-stat__val">{{ global?.total_players }}</span>
+      <span class="global-stat__lbl">corredores</span>
+    </div>
+    <div class="global-stat__divider"></div>
+    <div class="global-stat">
+      <span class="global-stat__val">{{ global?.total_sessions }}</span>
+      <span class="global-stat__lbl">sesiones</span>
+    </div>
+    <div class="global-stat__divider"></div>
+    <div class="global-stat">
+      <span class="global-stat__val">{{ (global?.total_area_ha || 0).toFixed(0) }}</span>
+      <span class="global-stat__lbl">hectáreas conquistadas</span>
+    </div>
+    <div class="global-stat__divider"></div>
+    <div class="global-stat">
+      <span class="global-stat__val">{{ (global?.total_distance_km || 0).toFixed(0) }}</span>
+      <span class="global-stat__lbl">km recorridos</span>
+    </div>
+  </section>
+
+  <!-- Mi tarjeta -->
+  <!-- Avoid structural directive *ngIf to prevent missing CommonModule error -->
+  <section class="my-card" [hidden]="!myStats">
+    <div class="my-card__rank">#{{ myStats?.rank }}</div>
+    <div class="my-card__info">
+      <span class="my-card__label">TU POSICIÓN</span>
+      <span class="my-card__name">{{ myStats?.name }}</span>
+    </div>
+    <div class="my-card__stats">
+      <div class="my-card__stat">
+        <span class="my-card__stat-val">{{ myStats?.total_area_ha?.toFixed(2) }}</span>
+        <span class="my-card__stat-lbl">ha</span>
+      </div>
+      <div class="my-card__stat">
+        <span class="my-card__stat-val">{{ myStats?.total_distance_km?.toFixed(1) }}</span>
+        <span class="my-card__stat-lbl">km</span>
+      </div>
+      <div class="my-card__stat">
+        <span class="my-card__stat-val">{{ myStats?.total_territories }}</span>
+        <span class="my-card__stat-lbl">zonas</span>
+      </div>
+      <div class="my-card__stat">
+        <span class="my-card__stat-val">{{ formatDuration(myStats?.total_duration_sec || 0) }}</span>
+        <span class="my-card__stat-lbl">tiempo</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ranking table -->
+  <section class="ranking">
+    <h2 class="ranking__title">RANKING GLOBAL</h2>
+
+    <div class="table-wrap" [hidden]="loading">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="th th--rank">#</th>
+            <th class="th">JUGADOR</th>
+            <th class="th th--sort" (click)="sortBy('total_area_ha')">
+              ÁREA (ha)
+              <span class="sort-icon" [class.sort-icon--active]="sortColumn === 'total_area_ha'">
+                {{ sortAsc ? '↑' : '↓' }}
+              </span>
+            </th>
+            <th class="th th--sort" (click)="sortBy('total_distance_km')">
+              DISTANCIA
+              <span class="sort-icon" [class.sort-icon--active]="sortColumn === 'total_distance_km'">
+                {{ sortAsc ? '↑' : '↓' }}
+              </span>
+            </th>
+            <th class="th th--sort" (click)="sortBy('total_territories')">
+              ZONAS
+              <span class="sort-icon" [class.sort-icon--active]="sortColumn === 'total_territories'">
+                {{ sortAsc ? '↑' : '↓' }}
+              </span>
+            </th>
+            <th class="th th--sort" (click)="sortBy('total_sessions')">
+              SESIONES
+              <span class="sort-icon" [class.sort-icon--active]="sortColumn === 'total_sessions'">
+                {{ sortAsc ? '↑' : '↓' }}
+              </span>
+            </th>
+            <th class="th">TIEMPO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let player of ranking"
+            class="tr"
+            [class.tr--me]="isMe(player)"
+          >
+            <td class="td td--rank">
+              <span class="medal" [style.color]="medalColor(player.rank)">
+                {{ player.rank <= 3 ? '⬡' : player.rank }}
+              </span>
+            </td>
+            <td class="td td--name">
+              {{ player.name }}
+              <span [hidden]="!isMe(player)" class="you-tag">TÚ</span>
+            </td>
+            <td class="td td--num">{{ player.total_area_ha.toFixed(2) }}</td>
+            <td class="td td--num">{{ player.total_distance_km.toFixed(1) }} km</td>
+            <td class="td td--num">{{ player.total_territories }}</td>
+            <td class="td td--num">{{ player.total_sessions }}</td>
+            <td class="td td--num">{{ formatDuration(player.total_duration_sec) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="skeleton-row" [hidden]="!loading"></div>
+    <div class="skeleton-row" [hidden]="!loading"></div>
+    <div class="skeleton-row" [hidden]="!loading"></div>
+    <div class="skeleton-row" [hidden]="!loading"></div>
+    <div class="skeleton-row" [hidden]="!loading"></div>
+  </section>
+
+</div>

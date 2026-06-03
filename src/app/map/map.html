@@ -1,0 +1,99 @@
+  <div class="btn-regresar">
+      <button>
+        <mat-icon>home</mat-icon>
+        <span class="btn__label"><a routerLink="/dashboard"> Regresar a inicio</a></span>
+      </button>
+    </div>
+
+<div class="map-shell">
+
+  <!-- Mapa -->
+  <div #mapContainer class="map-canvas"></div>
+
+  <!-- HUD superior: stats -->
+  <div class="hud hud--top"
+    [class.hud--visible]="sessionState === 'running' || sessionState === 'paused' || sessionState === 'finished'">
+    <div class="stat">
+      <span class="stat__value">{{ elapsedTime }}</span>
+      <span class="stat__label">tiempo</span>
+    </div>
+    <div class="stat stat--center">
+      <span class="stat__value">{{ distanceKm.toFixed(2) }}</span>
+      <span class="stat__label">km</span>
+    </div>
+    <div class="stat">
+      <span class="stat__value">{{ pointCount }}</span>
+      <span class="stat__label">puntos GPS</span>
+    </div>
+  </div>
+
+  <!-- Toast: territorio conquistado -->
+  <div class="toast toast--conquest" [class.toast--show]="conquestResult">
+    <span class="toast__icon">⬡</span>
+    <div class="toast__body">
+      <span class="toast__title">¡Territorio conquistado!</span>
+      <span class="toast__sub" [hidden]="!conquestResult">
+        {{ conquestResult?.area_m2 != null ? ((conquestResult?.area_m2 ?? 0) / 10000).toFixed(2) : '' }} ha
+        <span [hidden]="!((conquestResult?.reconquered ?? 0) > 0)">
+          · {{ conquestResult?.reconquered }} zona{{ (conquestResult?.reconquered ?? 0) > 1 ? 's' : '' }} reconquistada{{ (conquestResult?.reconquered ?? 0) > 1 ? 's' : '' }}
+        </span>
+      </span>
+    </div>
+  </div>
+
+  <!-- Toast: error -->
+  <div class="toast toast--error" [class.toast--show]="errorMsg">
+    <span class="toast__icon">⚠</span>
+    <span>{{ errorMsg }}</span>
+  </div>
+
+  <!-- Controles inferiores -->
+  <div class="controls">
+
+    <div [hidden]="sessionState !== 'idle'">
+      <button class="btn btn--primary btn--large" (click)="onStart()">
+        <span class="btn__icon">▶</span>
+        Iniciar carrera
+      </button>
+    </div>
+
+    <div [hidden]="sessionState !== 'running'">
+      <button class="btn btn--ghost" (click)="onPause()">
+        <span class="btn__icon">⏸</span>
+        Pausar
+      </button>
+      <button class="btn btn--danger" (click)="onFinish()">
+        <span class="btn__icon">⏹</span>
+        Terminar
+      </button>
+    </div>
+
+    <div [hidden]="sessionState !== 'paused'">
+      <button class="btn btn--primary" (click)="onResume()">
+        <span class="btn__icon">▶</span>
+        Reanudar
+      </button>
+      <button class="btn btn--danger" (click)="onFinish()">
+        <span class="btn__icon">⏹</span>
+        Terminar
+      </button>
+    </div>
+
+    <div [hidden]="sessionState !== 'finished'">
+      <div class="finish-banner">
+        <p class="finish-banner__title">Sesión completada</p>
+        <p class="finish-banner__sub">{{ distanceKm.toFixed(2) }} km · {{ elapsedTime }}</p>
+      </div>
+      <button class="btn btn--ghost" (click)="onReset()">
+        Nueva carrera
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Indicador de pausa -->
+  <div class="pause-overlay" [hidden]="sessionState !== 'paused'">
+    <span>PAUSADO</span>
+  </div>
+
+</div>

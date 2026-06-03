@@ -1,0 +1,60 @@
+
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            background-color: #0f172a; /* Fondo muy oscuro para resaltar colores */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+        }
+
+        /* Contenedor de los triángulos */
+        .triangle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: changeColor 8s infinite alternate ease-in-out;
+            opacity: 0.6;
+        }
+
+        /* Definición de los 3 triángulos con clip-path */
+        .t1 { clip-path: polygon(0 0, 100% 0, 0 100%); background: #3b82f6; } /* Azul */
+        .t2 { clip-path: polygon(100% 0, 100% 100%, 0 100%); background: #8b5cf6; } /* Púrpura */
+        .t3 { clip-path: polygon(0 0, 100% 100%, 100% 0); background: #06b6d4; } /* Cian */
+
+        @keyframes changeColor {
+            0% { filter: hue-rotate(0deg) brightness(1); }
+            50% { filter: hue-rotate(90deg) brightness(1.2); }
+            100% { filter: hue-rotate(180deg) brightness(1); }
+        }
+.login-container{
+display: flex;
+justify-content: center; /* Centra horizontalmente */
+align-items: center; /* Centra verticalmente */
+background-color: #f0f0f0;
+height: 100vh; /* Ocupa toda la altura de la ventana */
+}
+
+.hijo{
+    color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.429);
+    z-index: 1;
+}
+
+h1 {
+    font-family: 'Caesar Dressing', cursive;
+    font-size: 52px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.7);
+}
+
+ 

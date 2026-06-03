@@ -1,0 +1,16 @@
+.register-container{
+display: flex;
+justify-content: center; /* Centra horizontalmente */
+align-items: center; /* Centra verticalmente */
+background-color: #f0f0f0;
+height: 100vh; /* Ocupa toda la altura de la ventana */
+}
+
+.register-form-hijo{
+    color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.429);
+    background-color: #ff6347;
+}

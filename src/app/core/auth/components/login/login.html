@@ -1,0 +1,38 @@
+
+<link rel="stylesheet" href="./login.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
+
+<div class="triangle t1"></div>
+    <div class="triangle t2"></div>
+    <div class="triangle t3"></div>
+<div class="login-container">
+  <div class="hijo">
+    <h1> Running War</h1><br>
+  <h2>Iniciar Sesión</h2><br>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div>
+    <mat-form-field>
+      <input matInput placeholder="Email" type="email" formControlName="email">
+    </mat-form-field>
+    @if (loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['email']) {
+      <small style="color: rgb(255, 247, 0);">Email inválido</small>
+    }
+  </div>
+
+  <div>
+    <mat-form-field>
+      <input matInput placeholder="Contraseña" type="password" formControlName="password">
+    </mat-form-field>
+    @if (loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']) {
+      <small style="color: rgb(255, 251, 0);">Contraseña obligatoria</small>
+    }
+  </div>
+
+  <button mat-raised-button color="warn" type="submit" [disabled]="loginForm.invalid">Ingresar</button> <br>
+  <p>¿No tienes una cuenta?<a matButton color="primary" routerLink="/register"> Registrarse</a></p>
+  <p style="color: rgb(238, 255, 0);">{{ errorMessage }}</p>
+</form>
+</div>
+</div>

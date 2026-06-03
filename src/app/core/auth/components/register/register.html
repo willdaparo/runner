@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="./register.css">
+
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white p-8 rounded shadow w-full max-w-md">
+    <h2 class="text-2xl font-bold mb-6 text-center">Crear cuenta</h2>
+
+    <div *ngIf="error" class="bg-red-100 text-red-700 p-3 rounded mb-4">
+      {{ error }}
+    </div>
+<div class="container">
+  <div class="hijo">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="mb-4">
+       <mat-form-field> <input matInput formControlName="name" type="text" placeholder="Tu nombre"
+          [class.border-red-500]="form.get('name')?.invalid && form.get('name')?.touched"
+          class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></mat-form-field>
+        <p *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="text-red-500 text-xs mt-1">
+          El nombre es requerido.
+        </p>
+      </div>
+
+      <div class="mb-4">
+        <mat-form-field><input matInput formControlName="email" type="email" placeholder="correo@ejemplo.com"
+          [class.border-red-500]="form.get('email')?.invalid && form.get('email')?.touched"
+          class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></mat-form-field>
+        <p *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="text-red-500 text-xs mt-1">
+          Ingresa un correo electrónico válido.
+        </p>
+      </div>
+
+      <div class="mb-4">
+        <mat-form-field>
+        <input matInput formControlName="password" type="password" placeholder="Contraseña"
+          [class.border-red-500]="form.get('password')?.invalid && form.get('password')?.touched"
+          class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></mat-form-field>
+        <p *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="text-red-500 text-xs mt-1">
+          La contraseña debe tener al menos 6 caracteres.
+        </p>
+      </div>
+
+      <div class="mb-6">
+        <mat-form-field>
+        <input matInput formControlName="password_confirmation" type="password" placeholder="Confirmar contraseña"
+          [class.border-red-500]="form.errors?.['mismatch'] && form.get('password_confirmation')?.touched"
+          class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></mat-form-field>
+        <p *ngIf="form.errors?.['mismatch'] && form.get('password_confirmation')?.touched" class="text-red-500 text-xs mt-1">
+          Las contraseñas no coinciden.
+        </p>
+      </div>
+
+      <button  mat-raised-button color="warn" type="submit" [disabled]="loading"
+        class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:opacity-50">
+        {{ loading ? 'Registrando...' : 'Registrarse' }}
+      </button>
+    </form>
+    <p class="text-center mt-4 text-sm">
+      ¿Ya tienes cuenta? <a matButton color="primary" routerLink="/login">Inicia sesión</a>
+    </p>
+</div>
+</div>
+    
+  </div>
+</div>
