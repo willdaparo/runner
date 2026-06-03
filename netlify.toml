@@ -1,6 +1,9 @@
 [build]
-  command = "ng build --configuration production"
-  publish = "dist/nombre-de-tu-app/browser"
+  command = "ng build --configuration production --no-server-rendering"
+  publish = "dist/frontend/browser"
+
+[build.environment]
+  NODE_VERSION = "18"
 
 [[redirects]]
   from = "/*"
