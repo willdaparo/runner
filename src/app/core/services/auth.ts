@@ -7,7 +7,7 @@ import { Observable, tap } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:8000/api/auth';
+  private apiUrl = 'https://runner-frontend-production.up.railway.app';
 
   constructor(private http: HttpClient) {}
 
