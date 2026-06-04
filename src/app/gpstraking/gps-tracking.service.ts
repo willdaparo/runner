@@ -15,7 +15,7 @@ export type SessionState = 'idle' | 'running' | 'paused' | 'finished';
 })
 export class GpsTrackingService implements OnDestroy {
   // ─── Config ───────────────────────────────────────────────────────────────
-  private readonly API_URL = 'https://runner-frontend-production.up.railway.app/api'; // Cambia por tu URL de Laravel
+  private readonly API_URL = 'https://runner-backend-production.up.railway.app/api'; // Cambia por tu URL de Laravel
   private readonly CLOSE_THRESHOLD_METERS = 30;  // distancia para cerrar polígono
   private readonly MIN_ACCURACY_METERS = 20;     // ignora puntos con baja precisión
   private readonly SEND_INTERVAL_MS = 3000;      // cada cuánto envía puntos al back
