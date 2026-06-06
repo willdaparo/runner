@@ -65,7 +65,7 @@ export class Dashboard implements OnInit {
   }
 
   goToMap(): void {
-    this.router.navigate(['/map']);
+    this.router.navigate(['/mapa']);
   }
 
   sortBy(col: keyof PlayerStat): void {
