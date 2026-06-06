@@ -195,7 +195,7 @@
 .btn--danger {
   background: rgba(255, 77, 109, 0.12);
   border: 1px solid rgba(255, 77, 109, 0.3);
-  color: var(--danger);
+  color: #ff4d6d;
 }
 
 .btn--danger:hover {
@@ -245,7 +245,7 @@
   font-family: var(--font-display);
   font-size: 48px;
   font-weight: 700;
-  color: rgb(255, 255, 255);
+  color: rgba(255, 255, 255, 0.06);
   letter-spacing: 12px;
   user-select: none;
 }
