@@ -51,6 +51,7 @@
   align-items: center;
   padding: 14px 28px;
   min-width: 90px;
+  color: white;
 }
 
 .stat--center {
@@ -217,13 +218,13 @@
   font-family: var(--font-display);
   font-size: 18px;
   font-weight: 700;
-  color: var(--accent);
+  color: white;
   margin: 0 0 4px;
 }
 
 .finish-banner__sub {
   font-size: 13px;
-  color: var(--text-muted);
+  color: white;
   margin: 0;
 }
 
@@ -242,7 +243,7 @@
   font-family: var(--font-display);
   font-size: 48px;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.06);
+  color: rgb(255, 255, 255);
   letter-spacing: 12px;
   user-select: none;
 }

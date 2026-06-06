@@ -81,7 +81,12 @@ class SessionController extends Controller
         $session = RunSession::with('points')->findOrFail($sessionId);
 
         if ($session->status === 'finished') {
-            return response()->json(['error' => 'La sesión ya está finalizada.'], 422);
+             return response()->json([
+            'session_id'       => $session->id,
+            'status'           => 'finished',
+            'distance_km'      => round($session->distance_km, 3),
+            'duration_seconds' => $session->duration_seconds,
+        ]);
         }
 
         // Calcula duración total
