@@ -50,6 +50,7 @@ export class Dashboard implements OnInit {
         this.myStats = res.my_stats;
         this.global  = res.global;
         this.loading = false;
+        console.log('Dashboard stats loaded:', res);
       },
       error: () => (this.loading = false),
     });
