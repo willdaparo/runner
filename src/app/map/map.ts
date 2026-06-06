@@ -90,6 +90,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.gps.reset();
     this.subs.add(
       this.gps.state$.subscribe((state) => {
         this.sessionState = state;
