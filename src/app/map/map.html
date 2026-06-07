@@ -33,7 +33,7 @@
     <div class="toast__body">
       <span class="toast__title">¡Territorio conquistado!</span>
       <span class="toast__sub" [hidden]="!conquestResult">
-        {{ conquestResult?.area_m2 != null ? (conquestResult?.area_m2 / 10000).toFixed(2) : '' }} ha
+        {{ conquestResult?.area_m2 != null ? ((conquestResult?.area_m2 ?? 0) / 10000).toFixed(2) : '' }} ha
         <span [hidden]="!((conquestResult?.reconquered ?? 0) > 0)">
           · {{ conquestResult?.reconquered }} zona{{ (conquestResult?.reconquered ?? 0) > 1 ? 's' : '' }} reconquistada{{ (conquestResult?.reconquered ?? 0) > 1 ? 's' : '' }}
         </span>
